@@ -1,0 +1,45 @@
+#include <Union/Hook.h>
+#include <ZenGin/zGothicAPI.h>
+
+#include <map>
+#include <array>
+ 
+enum class LoadReason : size_t
+{
+    NONE,
+    NEW_GAME,
+    LOAD_SAVE,
+    WORLD_CHANGE
+};
+
+struct TGameSaveLoadInfo
+{
+    int Slot;
+    LoadReason LoadReason;
+
+    static ::Union::String GetSaveSlotName(int id)
+    {
+        if (id > 0)
+        {
+            return ::Union::String::Format("savegame{0}", id);
+        }
+        if (id == 0)
+        {
+            return ::Union::String("quicksave");
+        }
+        return ::Union::String("current");
+    }
+};
+inline TGameSaveLoadInfo slInfo;
+
+#ifdef __@PlatformSuffix@
+#define GOTHIC_NAMESPACE @GothicNamespace@
+#define ENGINE Engine_@PlatformSuffix@
+HOOKSPACE(@GothicNamespace@, GetGameVersion() == ENGINE);
+#include "Headers.h"
+#include "@IppFile@"
+#undef GOTHIC_NAMESPACE
+#undef ENGINE
+#endif
+
+HOOKSPACE(Global, true);

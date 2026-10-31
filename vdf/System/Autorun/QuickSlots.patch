@@ -1,0 +1,6 @@
+#engine [G1, G1A, G2, G2A]
+	#patch [Fix_spell_limit]
+		INT oCMag_Book_Register_addr1 = ZenDef(0x0046efd3, 0x00477e23, 0x00474813, 0x00475bb3) + 3
+		HEX @oCMag_Book_Register_addr1 = '15'
+	#/patch
+#/engine
