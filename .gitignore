@@ -17,5 +17,3 @@
 *.vdf
 
 # CMake user config
-
-CMakeUserConfigPresets.json
