@@ -1,2 +1,1 @@
-[1.0.0]  
-- Initial release.
+- Fix for crash on missing spell item

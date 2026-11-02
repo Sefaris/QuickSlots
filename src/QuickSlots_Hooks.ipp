@@ -219,13 +219,21 @@ namespace GOTHIC_NAMESPACE
     static zCOLOR originalFontColor;
     void __fastcall oCMag_Book__DoPerFrame_Before(::Union::Registers& reg)
     {
+        originalFontColor = screen->fontColor;
+
         if (player->HasBodyStateModifier(BS_MOD_TRANSFORMED) || player->HasBodyStateModifier(BS_MOD_CONTROLLED) || player->HasBodyStateModifier(BS_MOD_CONTROLLING))
         {
             return;
         }
 
+        auto spellBook = player->GetSpellBook();
         auto spell = reinterpret_cast<oCSpell*>(zSwitch(reg.edx, reg.eax, reg.edx, reg.edx));
-        auto item = player->GetSpellBook()->GetSpellItem(spell);
+        if (!spellBook || !spell)
+        {
+            return;
+        }
+
+        auto item = spellBook->GetSpellItem(spell);
 
         auto hotkey = quickSlots->GetSlotNumberFromItem(item);
 
@@ -233,8 +241,6 @@ namespace GOTHIC_NAMESPACE
         {
             return;
         }
-
-        originalFontColor = screen->fontColor;
 
         auto& slotNr = *zSwitch(&reg.eax, &reg.ecx, &reg.esi, &reg.esi);
         slotNr = static_cast<int>(hotkey > 10 ? hotkey - quickSlots->maxCellsInRow : hotkey);

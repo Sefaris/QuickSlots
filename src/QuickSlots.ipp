@@ -470,6 +470,11 @@ namespace GOTHIC_NAMESPACE
 
     size_t QuickSlots::GetSlotNumberFromItem(oCItem* item)
     {
+        if (!item)
+        {
+            return -1;
+        }
+
         for (auto& it : this->CurrentSlots)
         {
             std::string instanceName = item->GetInstanceName().ToChar();
@@ -963,9 +968,15 @@ namespace GOTHIC_NAMESPACE
                     {
                         if (player->HasMagic())
                         {
-                            if (player->GetWeaponMode() == NPC_WEAPON_MAG && player->GetSpellBook()->GetSpellItem(player->GetSpellBook()->GetSelectedSpell())->instanz == item->instanz)
+                            if (player->GetWeaponMode() == NPC_WEAPON_MAG)
                             {
-                                return 2;
+                                auto spellBook = player->GetSpellBook();
+                                auto selectedSpell = spellBook ? spellBook->GetSelectedSpell() : nullptr;
+                                auto selectedItem = selectedSpell ? spellBook->GetSpellItem(selectedSpell) : nullptr;
+                                if (selectedItem && selectedItem->instanz == item->instanz)
+                                {
+                                    return 2;
+                                }
                             }
                             
                             return _showEquippedSpells ? 1 : 0;
