@@ -1077,7 +1077,7 @@ namespace GOTHIC_NAMESPACE
             {
                 modifierName = zSTRING{ pluginInput.GetKeyName(this->GetModifierHotkey()).c_str() };
             }
-            auto altQSText = zSTRING{ "Przytrzymaj "} + modifierName + zSTRING{ ", aby skorzysta� z alternatywnych slot�w." };
+            auto altQSText = zSTRING{ "Przytrzymaj "} + modifierName + zSTRING{ ", aby skorzysta\xE6 z alternatywnych slot\xF3w." };
             auto altQSTextSize = screen->FontSize(altQSText);
             auto altQSTextPosX = startPosX - altQSTextSize / 2;
             auto altQSTextPosY = startPosY + (screen->FontY() / 2) + (this->cellSizeY * 2);
@@ -1086,7 +1086,7 @@ namespace GOTHIC_NAMESPACE
             screen->Print(altQSTextPosX, altQSTextPosY, altQSText);
 
             screen->SetFontColor(GFX_WHITE);
-            auto presetsText = zSTRING{ "Przytrzymaj "} + modifierName + zSTRING{ " i naci�nij F1-F4"} + zSTRING{ ", aby zapisa� preset." };
+            auto presetsText = zSTRING{ "Przytrzymaj "} + modifierName + zSTRING{ " i naci\x9Cnij F1-F4" } + zSTRING{ ", aby zapisa\xE6 preset." };
             auto presetsTextSize = screen->FontSize(presetsText);
             auto presetsTextPosX = startPosX - presetsTextSize / 2;
             auto presetsTextPosY = altQSTextPosY + screen->FontY();
@@ -1345,7 +1345,7 @@ namespace GOTHIC_NAMESPACE
         }
     #endif
 
-        auto msg = zSTRING{ "Saving preset: " } + zSTRING{ static_cast<int>(PresetNr) };
+        auto msg = zSTRING{ "Zapisano preset: " } + zSTRING{ static_cast<int>(PresetNr) };
         ogame->GetTextView()->Printwin(msg);
 
         for (auto it = presetItemsArmor.rbegin(); it != presetItemsArmor.rend(); ++it)
@@ -1392,7 +1392,7 @@ namespace GOTHIC_NAMESPACE
         auto it = this->Presets.find(PresetNr);
         if (it == this->Presets.end())
         {
-            auto msg = zSTRING{ "Preset " } + zSTRING{ static_cast<int>(PresetNr) } + zSTRING{ " not found!" };
+            auto msg = zSTRING{ "Preset " } + zSTRING{ static_cast<int>(PresetNr) } + zSTRING{ " nieznaleziony!" };
             ogame->GetTextView()->Printwin(msg);
             return;
         }
@@ -1404,7 +1404,7 @@ namespace GOTHIC_NAMESPACE
         this->CurrentSlots.clear();
 
         {
-            zSTRING msg = zSTRING{ "Switching preset: " } + zSTRING{ static_cast<int>(PresetNr) };
+            zSTRING msg = zSTRING{ "Zmiana presetu: " } + zSTRING{ static_cast<int>(PresetNr) };
             ogame->GetTextView()->Printwin(msg);
         }
 

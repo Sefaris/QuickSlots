@@ -1,1 +1,1 @@
-- Fix for crash on missing spell item
+- Fix for broken encodings
